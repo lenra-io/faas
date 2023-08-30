@@ -56,8 +56,8 @@ func MakeHorizontalScalingHandler(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		if scaleRequest.Replicas < 1 {
-			scaleRequest.Replicas = 1
+		if scaleRequest.Replicas < 0 {
+			scaleRequest.Replicas = 0
 		}
 
 		if scaleRequest.Replicas > DefaultMaxReplicas {
