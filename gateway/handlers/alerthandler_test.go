@@ -56,7 +56,7 @@ func TestInitialScale_From1_Factor10(t *testing.T) {
 	minReplicas := uint64(1)
 	scalingFactor := uint64(10)
 	got := CalculateReplicas("firing", scaling.DefaultMinReplicas, scaling.DefaultMaxReplicas, minReplicas, scalingFactor)
-	want := uint64(1)
+	want := uint64(10)
 
 	if got != want {
 		t.Fatalf("want: %d, but got: %d", want, got)
@@ -70,7 +70,7 @@ func TestScale_midrange_factor25(t *testing.T) {
 	maxReplicas := uint64(scaling.DefaultMaxReplicas)
 
 	got := CalculateReplicas("firing", current, maxReplicas, minReplicas, scalingFactor)
-	want := uint64(5)
+	want := uint64(29)
 	if want != got {
 		t.Fatalf("want: %d, but got: %d", want, got)
 	}
@@ -92,8 +92,9 @@ func TestScaleCeilingReplicasOver(t *testing.T) {
 	scalingFactor := uint64(10)
 	got := CalculateReplicas("firing", 19, scaling.DefaultMaxReplicas, minReplicas, scalingFactor)
 
-	if got != scaling.DefaultMaxReplicas {
-		t.Fatalf("want: %d, but got: %d", scaling.DefaultMaxReplicas, got)
+	want := uint64(29)
+	if got != want {
+		t.Fatalf("want: %d, but got: %d", want, got)
 	}
 }
 
